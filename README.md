@@ -32,3 +32,10 @@ Clock times appear in prose, logs, and free-form notes in inconsistent forms: do
 - `TimeMatch` — frozen dataclass with fields `raw`, `hour`, `minute`, `second`, `start`, `end`, and a `to_iso()` method returning `HH:MM:SS`.
 
 Zero third-party dependencies. Standard library only.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
